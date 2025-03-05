@@ -13,6 +13,8 @@ import DatePicker from '../../components/DatePicker'
 import { Theme } from '../../components/Theme'
 import EmojiPicker from '../../components/EmojiPicker'
 import { BaseEmoji } from 'emoji-mart'
+import AddIconButton from './AddIconButton'
+import GoalIcon from './GoalIcon'
 
 type Props = { goal: Goal }
 export function GoalManager(props: Props) {
@@ -74,7 +76,7 @@ export function GoalManager(props: Props) {
     }
   }
 
-  const [emojiPickerIsOpen, setEmojiPickerIsOpen] = useState(true)
+  const [emojiPickerIsOpen, setEmojiPickerIsOpen] = useState(false)
 
   const hasIcon = () => props.goal.icon != null
 
@@ -131,7 +133,11 @@ export function GoalManager(props: Props) {
       </Group>
 
       <Group>
-        <h1 onClick={() => setEmojiPickerIsOpen(!emojiPickerIsOpen)}>Emoji: {icon}</h1>
+        <AddIconButton
+          hasIcon={hasIcon()}
+          onClick={() => setEmojiPickerIsOpen(true)}
+        ></AddIconButton>
+        <GoalIcon icon={goal.icon} onClick={() => setEmojiPickerIsOpen(true)}></GoalIcon>
         <EmojiPickerContainer
           isOpen={emojiPickerIsOpen}
           hasIcon={hasIcon()}
